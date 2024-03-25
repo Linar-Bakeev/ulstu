@@ -1,0 +1,35 @@
+/* Основные стили для навигационной панели */
+.navbar {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+}
+
+.nav-link {
+    font-size: 1rem;
+}
+
+/* Стили для кнопок поиска */
+.navbar .btn-outline-success {
+    margin-left: 10px;
+}
+
+/* Стили для контейнера с контентом */
+.container {
+    margin-top: 20px;
+}
+
+/* Стили для заголовков */
+h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+/* Стили для форм */
+.form-inline {
+    margin-top: 10px;
+}
+
+/* Дополнительные стили, если нужно */
