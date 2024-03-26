@@ -13,9 +13,9 @@
                         @csrf
 
                         <div class="form-group">
-                            <label for="email">Логин</label>
-                            <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-                            @error('email')
+                            <label for="login">Логин</label>
+                            <input id="login" type="text" class="form-control @error('login') is-invalid @enderror" name="login" value="{{ old('login') }}" required autocomplete="email" autofocus>
+                            @error('login')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>

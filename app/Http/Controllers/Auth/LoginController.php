@@ -28,26 +28,26 @@ class LoginController extends Controller
     {
         // Валидация данных
         $validatedData = $request->validate([
-            'email' => 'required|string',
+            'login' => 'required|string',
             'password' => 'required|string',
         ]);
 
         // Разделение ввода email на person_id и admission_year
-        $loginParts = explode('/', $validatedData['email']);
+        $loginParts = explode('/', $validatedData['login']);
 
         if (count($loginParts) !== 2) {
             // Если введенный логин не соответствует формату "person_id/admission_year",
             // то выводим сообщение об ошибке и возвращаемся на страницу входа
             return back()->withErrors([
-                'email' => 'Неверный формат логина. Введите логин в формате "номер студенческого билета/год поступления".',
-            ])->withInput($request->only('email'));
+                'login' => 'Неверный формат логина. Введите логин в формате "номер студенческого билета/год поступления".',
+            ])->withInput($request->only('login'));
         }
-        // Извлечение person_id и admission_year из введенного email
+        // Извлечение person_id и admission_year из введенного логина
         $person_id = $loginParts[0];
         $admission_year = $loginParts[1];
 
         // Формирование логина в формате "person_id/admission_year"
-        $login = $validatedData['email'];
+        $login = $validatedData['login'];
 
         // Аутентификация пользователя по новому логину
         if (Auth::attempt(['person_id' => $person_id, 'admission_year' => $admission_year, 'password' => $validatedData['password']])) {
@@ -66,8 +66,8 @@ class LoginController extends Controller
 
         // Неверные учетные данные - возврат обратно с сообщением об ошибке
         return back()->withErrors([
-            'email' => 'Неверный логин или пароль.',
-        ])->withInput($request->only('email'));
+            'login' => 'Неверный логин или пароль.',
+        ])->withInput($request->only('login'));
     }
 
     /**
@@ -80,6 +80,6 @@ class LoginController extends Controller
     {
         Auth::logout();
 
-        return redirect('/');
+        return redirect('login.form');
     }
 }

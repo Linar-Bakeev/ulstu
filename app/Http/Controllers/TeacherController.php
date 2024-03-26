@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TeacherController extends Controller
 {
@@ -14,5 +15,10 @@ class TeacherController extends Controller
         // Возврат представления с данными учителей
     }
 
-    // Другие методы для управления учителями
+    public function subjects()
+    {
+        $teacher = Auth::user();
+        $subjects = $teacher->subjects;
+        return view('teacher.subjects', compact('subjects'));
+    }
 }

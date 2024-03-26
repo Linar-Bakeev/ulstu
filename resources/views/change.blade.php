@@ -7,24 +7,29 @@
         <h1>Изменение данных</h1>
         <form method="POST" action="{{ route('change') }}">
             @csrf
+
+{{--            <div class="form-group">--}}
+{{--                <label for="plain_password">Текущий пароль</label>--}}
+{{--                <input id="plain_password" type="text" class="form-control" name="plain_password" value="{{ auth()->user()->plain_password}}" >--}}
+{{--            </div>--}}
             <div class="form-group">
-                <label for="login">Логин</label>
-                <input id="login" type="text" class="form-control" name="login" value="{{ $user->login }}" required>
+                <label for="password">Новый пароль</label>
+                <input id="password" type="password" class="form-control" name="password" >
             </div>
+
             <div class="form-group">
-                <label for="password">Пароль</label>
-                <input id="password" type="password" class="form-control" name="password" required>
+                <label for="email">Email</label>
+                <input id="email" type="email" class="form-control" name="email" value="{{auth()->user()->email}}" >
             </div>
-            @if($user->role === 'student')
+            @if(auth()->user()->role === 'student')
                 <div class="form-group">
                     <label for="group">Учебная группа</label>
-                    <input id="group" type="text" class="form-control" name="group" value="{{ $user->group }}" required>
+                    <input id="group" type="text" class="form-control" name="group" value="{{ auth()->user()->group}}" >
                 </div>
-            @elseif($user->role === 'teacher')
-                <!-- Заглушка для преподавателя -->
+            @elseif(auth()->user()->role === 'teacher')
+
                 <div class="form-group">
-                    <label for="placeholder">Мини-меню (заглушка)</label>
-                    <input id="placeholder" type="text" class="form-control" name="placeholder" value="Заглушка для преподавателя" readonly>
+
                 </div>
             @endif
             <button type="submit" class="btn btn-primary">Сохранить</button>

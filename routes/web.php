@@ -51,6 +51,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::prefix('lks/teacher')->group(function () {
         Route::get('dashboard', [TeacherDashboardController::class, 'index'])->name('teacher.dashboard');
     });
+    Route::resource('subjects', 'SubjectController');
+    Route::get('teacher/subjects', 'TeacherController@subjects')->name('teacher.subjects');
 
     // Маршрут для изменения данных
     Route::post('change', function (){return view('change');})->name('change');
@@ -63,5 +65,13 @@ Route::get('/subjects', [SubjectController::class, 'index'])->name('subjects.ind
 Route::get('/grades', [GradeController::class, 'showPerformance'])->name('grades.performance');
 Route::get('/applications', [ApplicationController::class, 'index'])->name('applications.index');
 Route::get('/documents', [DocumentController::class, 'index'])->name('documents.index');
-Route::get('/teachers', [TeacherController::class, 'index'])->name('teachers.index');
 Route::get('/academic_years', [AcademicYearController::class, 'index'])->name('academic_years.index');
+
+
+Route::prefix('lks/teacher')->group(function () {
+    Route::get('dashboard', [TeacherDashboardController::class, 'index'])->name('teacher.dashboard');
+    Route::get('grades', [TeacherDashboardController::class, 'viewGrades'])->name('teacher.grades');
+    Route::get('fill_attendance', [TeacherDashboardController::class, 'fillAttendance'])->name('teacher.fill_attendance');
+    Route::get('create_announcement_form', [TeacherDashboardController::class, 'createAnnouncementForm'])->name('teacher.create_announcement_form');
+    Route::post('post_announcement', [TeacherDashboardController::class, 'postAnnouncement'])->name('teacher.post_announcement');
+});

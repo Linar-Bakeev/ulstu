@@ -20,13 +20,17 @@
         <div class="row justify-content-center mt-4">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Редактировать</div>
+                    <div class="card-header">Действия</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('change') }}">
+                        <form style="margin-bottom: 10px;" method="POST" action="{{ route('change') }}">
                             @csrf
                             <button type="submit" class="btn btn-primary">Редактировать данные</button>
                         </form>
+                        <a href="{{ route('teacher.grades') }}" class="btn btn-primary">Просмотреть успеваемость</a>
+                        <a href="{{ route('teacher.fill_attendance') }}" class="btn btn-primary">Заполнить ведомость</a>
+                        <a href="{{ route('teacher.create_announcement_form') }}" class="btn btn-primary">Создать объявление</a>
+                        <a href="{{ route('teacher.subjects') }}" class="btn btn-primary">Мои предметы</a>
                     </div>
                 </div>
             </div>
