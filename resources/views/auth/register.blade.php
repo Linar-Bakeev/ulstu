@@ -13,9 +13,9 @@
                         @csrf
 
                         <div class="form-group">
-                            <label for="student_id">Номер студенческого билета</label>
-                            <input id="student_id" type="text" class="form-control @error('student_id') is-invalid @enderror" name="student_id" value="{{ old('student_id') }}" required autocomplete="student_id" autofocus>
-                            @error('student_id')
+                            <label for="person_id">Номер студенческого билета</label>
+                            <input id="person_id" type="text" class="form-control @error('person_id') is-invalid @enderror" name="person_id" value="{{ old('person_id') }}" required autocomplete="student_id" autofocus>
+                            @error('person_id')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -57,7 +57,7 @@
 
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
-                        </div
+                        </div>
                     </form>
                 </div>
             </div>

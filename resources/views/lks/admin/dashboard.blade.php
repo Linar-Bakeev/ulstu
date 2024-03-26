@@ -11,7 +11,7 @@
 
                     <div class="card-body">
                         <p><strong>Логин:</strong> {{ auth()->user()->person_id }}</p>
-                        <p><strong>Пароль:</strong> *********</p>
+                        <p><strong>Пароль:</strong> {{ auth()->user()->plain_password }}</p>
                     </div>
                 </div>
             </div>

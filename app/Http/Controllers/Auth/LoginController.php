@@ -32,13 +32,36 @@ class LoginController extends Controller
             'password' => 'required|string',
         ]);
 
-        // Преобразование логина в формат "20/5762020"
+        // Разделение ввода email на person_id и admission_year
+        $loginParts = explode('/', $validatedData['email']);
+
+        if (count($loginParts) !== 2) {
+            // Если введенный логин не соответствует формату "person_id/admission_year",
+            // то выводим сообщение об ошибке и возвращаемся на страницу входа
+            return back()->withErrors([
+                'email' => 'Неверный формат логина. Введите логин в формате "номер студенческого билета/год поступления".',
+            ])->withInput($request->only('email'));
+        }
+        // Извлечение person_id и admission_year из введенного email
+        $person_id = $loginParts[0];
+        $admission_year = $loginParts[1];
+
+        // Формирование логина в формате "person_id/admission_year"
         $login = $validatedData['email'];
 
         // Аутентификация пользователя по новому логину
-        if (Auth::attempt(['person_id' => $login, 'password' => $validatedData['password']])) {
-            // Успешный вход - перенаправление пользователя
-            return redirect()->intended(route('dashboard'));
+        if (Auth::attempt(['person_id' => $person_id, 'admission_year' => $admission_year, 'password' => $validatedData['password']])) {
+            // Получаем аутентифицированного пользователя
+            $user = Auth::user();
+
+            // Перенаправление пользователя в зависимости от его роли
+            if ($user->role == 'student') {
+                return redirect()->route('student.dashboard');
+            } elseif ($user->role == 'teacher') {
+                return redirect()->route('teacher.dashboard');
+            } else {
+                return redirect()->route('admin.dashboard');
+            }
         }
 
         // Неверные учетные данные - возврат обратно с сообщением об ошибке

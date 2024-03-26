@@ -10,10 +10,11 @@
                     <div class="card-header">Личный кабинет студента</div>
 
                     <div class="card-body">
-                        <p><strong>Логин:</strong> {{ auth()->user()->person_id }}</p>
-                        <p><strong>Пароль:</strong> *********</p>
+                        <p><strong>Логин:</strong> {{ auth()->user()->person_id }}{{ auth()->user()->admission_year }}</p>
+                        <p><strong>Пароль:</strong> {{ auth()->user()->plain_password }}</p>
                         <p><strong>Учебная группа:</strong> {{ auth()->user()->group }}</p>
                     </div>
+
                 </div>
             </div>
         </div>
