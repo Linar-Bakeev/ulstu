@@ -13,6 +13,9 @@ class CreateSubjectsTable extends Migration
             $table->string('name');
             $table->timestamps();
         });
+        \App\Models\Subject::create([
+            'name' => 'Основы программирования',
+        ]);
     }
 
     public function down()

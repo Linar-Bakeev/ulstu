@@ -6,6 +6,7 @@
     <title>@yield('title')</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{asset('css/notification.css')}}">
 </head>
 <body>
 <!-- Навигационная панель -->
@@ -17,10 +18,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <!-- Общие ссылки для всех -->
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Главная</a>
-                </li>
+
                 <!-- Ссылки для студентов -->
                 @if(auth()->check() && auth()->user()->role === 'student')
                     <li class="nav-item">
@@ -37,9 +35,20 @@
                 @endif
                 <!-- Ссылки для администратора -->
                 @if(auth()->check() && auth()->user()->role === 'admin')
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.dashboard') }}">Панель управления</a>
-                    </li>
+
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.dashboard') }}">Панель управления</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.groups.index') }}">Список групп</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.groups.create') }}">Добавить группу</a>
+                            </li>
+                        </ul>
+                    </div>
                     <!-- Другие ссылки для администратора -->
                 @endif
             </ul>
@@ -68,6 +77,6 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+<script src="{{asset('js/notification.js')}}"></script>
 </body>
 </html>

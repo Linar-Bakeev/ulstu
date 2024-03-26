@@ -19,6 +19,6 @@ class TeacherController extends Controller
     {
         $teacher = Auth::user();
         $subjects = $teacher->subjects;
-        return view('teacher.subjects', compact('subjects'));
+        return view('subjects.index', compact('subjects'));
     }
 }

@@ -1,12 +1,13 @@
 <?php
 
 use App\Http\Controllers\AcademicYearController;
+use App\Http\Controllers\Admin\GroupsController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\GradeController;
-use App\Http\Controllers\GroupController;
 use App\Http\Controllers\LKs\AdminDashboardController;
 use App\Http\Controllers\LKs\StudentDashboardController;
 use App\Http\Controllers\LKs\TeacherDashboardController;
@@ -35,6 +36,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Маршруты для личного кабинета студента
     Route::prefix('lks/student')->group(function () {
+
         Route::get('dashboard', [StudentDashboardController::class, 'index'])->name('student.dashboard');
         Route::get('academic-performance', [StudentController::class, 'viewAcademicPerformance'])->name('student.academic_performance');
         Route::get('education-certificate', [StudentController::class, 'requestEducationCertificate'])->name('student.education_certificate');
@@ -45,33 +47,42 @@ Route::group(['middleware' => 'auth'], function () {
     // Маршруты для личного кабинета администратора
     Route::prefix('lks/admin')->group(function () {
         Route::get('dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+        // Маршруты для управления пользователями и группами
+        Route::resource('users', UserController::class, ['as' => 'admin']); // Маршруты для пользователей
+        Route::resource('groups', GroupsController::class, ['as' => 'admin']); // Маршруты для групп
     });
 
     // Маршруты для личного кабинета преподавателя
     Route::prefix('lks/teacher')->group(function () {
         Route::get('dashboard', [TeacherDashboardController::class, 'index'])->name('teacher.dashboard');
+        Route::get('grades', [TeacherDashboardController::class, 'viewGrades'])->name('teacher.grades');
+        Route::get('fill_attendance', [TeacherDashboardController::class, 'fillAttendance'])->name('teacher.fill_attendance');
+        Route::get('create_announcement_form', [TeacherDashboardController::class, 'createAnnouncementForm'])->name('teacher.create_announcement_form');
+        Route::post('post_announcement', [TeacherDashboardController::class, 'postAnnouncement'])->name('teacher.post_announcement');
+        Route::get('subjects', [TeacherController::class, 'subjects'])->name('teacher.subjects'); // Добавленный маршрут
     });
-    Route::resource('subjects', 'SubjectController');
-    Route::get('teacher/subjects', 'TeacherController@subjects')->name('teacher.subjects');
-
-    // Маршрут для изменения данных
-    Route::post('change', function (){return view('change');})->name('change');
 });
 
 // Маршруты для других представлений
-Route::get('/groups', [GroupController::class, 'index'])->name('groups.index');
+Route::get('/groups', [ScheduleController::class, 'index'])->name('groups.index'); // Пока не определено, какой контроллер используется для списка групп, поэтому временно указан ScheduleController
 Route::get('/schedule', [ScheduleController::class, 'showSchedule'])->name('schedule.index');
 Route::get('/subjects', [SubjectController::class, 'index'])->name('subjects.index');
-Route::get('/grades', [GradeController::class, 'showPerformance'])->name('grades.performance');
 Route::get('/applications', [ApplicationController::class, 'index'])->name('applications.index');
 Route::get('/documents', [DocumentController::class, 'index'])->name('documents.index');
 Route::get('/academic_years', [AcademicYearController::class, 'index'])->name('academic_years.index');
 
+//Route::prefix('lks/teacher')->group(function () {
+//    Route::get('dashboard', [TeacherDashboardController::class, 'index'])->name('teacher.dashboard');
+//    Route::get('grades', [TeacherDashboardController::class, 'viewGrades'])->name('teacher.grades');
+//    Route::get('fill_attendance', [TeacherDashboardController::class, 'fillAttendance'])->name('teacher.fill_attendance');
+//    Route::get('create_announcement_form', [TeacherDashboardController::class, 'createAnnouncementForm'])->name('teacher.create_announcement_form');
+//    Route::post('post_announcement', [TeacherDashboardController::class, 'postAnnouncement'])->name('teacher.post_announcement');
+//    Route::get('subjects', [TeacherController::class, 'subjects'])->name('teacher.subjects'); // Добавленный маршрут
+//});
+Route::post('change', function (){return view('change');})->name('change');
 
-Route::prefix('lks/teacher')->group(function () {
-    Route::get('dashboard', [TeacherDashboardController::class, 'index'])->name('teacher.dashboard');
-    Route::get('grades', [TeacherDashboardController::class, 'viewGrades'])->name('teacher.grades');
-    Route::get('fill_attendance', [TeacherDashboardController::class, 'fillAttendance'])->name('teacher.fill_attendance');
-    Route::get('create_announcement_form', [TeacherDashboardController::class, 'createAnnouncementForm'])->name('teacher.create_announcement_form');
-    Route::post('post_announcement', [TeacherDashboardController::class, 'postAnnouncement'])->name('teacher.post_announcement');
-});
+Route::resource('subjects', 'SubjectController');
+
+Route::get('/grades', [GradeController::class, 'showPerformance'])->name('grades.performance');
+Route::get('/grades/create', [GradeController::class, 'create'])->name('grades.create');
+Route::post('/grades/store', [GradeController::class, 'store'])->name('grades.store');
