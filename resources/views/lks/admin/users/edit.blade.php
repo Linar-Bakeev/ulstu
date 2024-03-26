@@ -17,14 +17,17 @@
                 <label for="email">Email</label>
                 <input type="email" name="email" id="email" class="form-control" value="{{ $user->email }}" required>
             </div>
+
             <div class="form-group">
                 <label for="role">Роль</label>
                 <select name="role" id="role" class="form-control" required>
+                    <option value="">Выберите роль</option>
                     <option value="student" {{ $user->role === 'student' ? 'selected' : '' }}>Студент</option>
                     <option value="teacher" {{ $user->role === 'teacher' ? 'selected' : '' }}>Преподаватель</option>
                     <option value="admin" {{ $user->role === 'admin' ? 'selected' : '' }}>Администратор</option>
                 </select>
             </div>
+            @if($user->role == 'student')
             <div class="form-group">
                 <label for="group_id">Группа</label>
                 <select name="group_id" id="group_id" class="form-control">
@@ -33,7 +36,7 @@
                     @endforeach
                 </select>
             </div>
-
+            @endif
             <button type="submit" class="btn btn-primary">Сохранить</button>
         </form>
     </div>

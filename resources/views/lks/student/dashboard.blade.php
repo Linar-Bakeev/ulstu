@@ -38,27 +38,4 @@
     </div>
 
 
-
-
-    {{--        <h2>Успеваемость</h2>--}}
-{{--        <table class="table">--}}
-{{--            <thead>--}}
-{{--            <tr>--}}
-{{--                <th>Предмет</th>--}}
-{{--                <th>Оценка</th>--}}
-{{--                <th>Долги</th>--}}
-{{--            </tr>--}}
-{{--            </thead>--}}
-{{--            <tbody>--}}
-{{--            @foreach ($grades as $grade)--}}
-{{--                <tr>--}}
-{{--                    <td>{{ $grade->subject->name }}</td>--}}
-{{--                    <td>{{ $grade->mark }}</td>--}}
-{{--                    <td>{{ $grade->is_debt ? 'Есть' : 'Нет' }}</td>--}}
-{{--                </tr>--}}
-{{--            @endforeach--}}
-{{--            </tbody>--}}
-{{--        </table>--}}
-
-
 @endsection

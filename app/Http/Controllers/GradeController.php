@@ -4,22 +4,46 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Grade;
+use App\Models\Subject;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Group;
+use App\Models\User;
+
 
 class GradeController extends Controller
 {
-    // Метод для отображения успеваемости студентов
-    public function showPerformance()
+
+    public function create(Request $request)
     {
-        $grades = Grade::with('student', 'subject')->get()->groupBy('subject_id');
+        // Получаем список предметов преподавателя
+        $subjects = Auth::user()->subjects;
 
-        return view('grades.performance', compact('grades'));
+        // Получаем список групп
+        $groups = Group::all();
+
+        // По умолчанию список студентов пуст
+        $students = [];
+
+        if ($request->has('group_id')) {
+            $group = Group::find($request->group_id);
+            if ($group) {
+                $students = $group->students;
+            }
+        }
+
+
+        return view('grades.create', compact('subjects', 'groups', 'students'));
     }
-
-    public function create()
+    public function getStudentsByGroupId($groupId)
     {
-        return view('grades.create');
-    }
+        // Получаем объект группы по ее ID
+        $group = Group::findOrFail($groupId);
 
+        // Получаем список студентов этой группы
+        $students = $group->students;
+
+        return $students;
+    }
     public function store(Request $request)
     {
         // Проверка и валидация данных
@@ -35,4 +59,6 @@ class GradeController extends Controller
 
         return redirect()->route('grades.create')->with('success', 'Оценка успешно добавлена.');
     }
+
+
 }

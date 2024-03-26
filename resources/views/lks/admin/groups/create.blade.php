@@ -5,7 +5,7 @@
 @section('content')
     <div class="container">
         <h1>Добавить группу</h1>
-        <form method="POST" action="{{ route('lks.admin.groups.store') }}">
+        <form method="POST" action="{{ route('admin.groups.store') }}">
             @csrf
             <div class="form-group">
                 <label for="name">Название группы</label>

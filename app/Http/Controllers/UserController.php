@@ -34,5 +34,5 @@ class UserController extends Controller
         return redirect('/')->with('success', 'Вы успешно зарегистрированы');
     }
 
-    // Другие методы для управления пользователями
+
 }

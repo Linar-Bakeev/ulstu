@@ -26,21 +26,27 @@ class UserController extends Controller
         $validatedData = $request->validate([
             'person_id' => 'required|string|unique:users',
             'email' => 'required|string|email|unique:users',
-//            'password' => 'required|string|min:6',
             'role' => 'required|in:student,teacher,admin',
-            'group_id' => 'required_if:role,student|exists:groups,id',
+            'group_id' => 'nullable|exists:groups,id',
         ]);
 
         $validatedData['password'] = bcrypt($request->password);
 
         // Проверяем, выбрана ли роль студента
         if ($request->role === 'student') {
-            // Сохраняем пользователя со связанной группой
-            $user = User::create($validatedData);
-            $user->groups()->attach($request->group_id);
+            // Если выбрана учебная группа, сохраняем ее идентификатор
+            if ($request->filled('group_id')) {
+                $group_id = $request->group_id;
+            } else {
+                // Если учебная группа не выбрана, сохраняем значение null
+                $group_id = null;
+            }
+
+            // Создаем пользователя со связанной группой
+            $user = User::create(array_merge($validatedData, ['group_id' => $group_id]));
         } else {
             // Сохраняем пользователя без связанной группы
-            User::create($validatedData);
+            $user = User::create($validatedData);
         }
 
         return redirect()->route('admin.users.index')->with('success', 'Пользователь успешно добавлен.');

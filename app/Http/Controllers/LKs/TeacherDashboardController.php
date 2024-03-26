@@ -25,12 +25,12 @@ class TeacherDashboardController extends Controller
 
     public function fillAttendance()
     {
-        // Здесь должна быть логика заполнения ведомости
+        //  логика заполнения ведомости
     }
 
     public function createAnnouncementForm()
     {
-        // Здесь должна быть логика формирования формы для создания объявления
+        //логика формирования формы для создания объявления
     }
 
     public function postAnnouncement(Request $request)

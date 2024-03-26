@@ -17,5 +17,4 @@ class ApplicationController extends Controller
         return view('applications.index', compact('applications'));
     }
 
-    // Другие методы для управления заявлениями
 }

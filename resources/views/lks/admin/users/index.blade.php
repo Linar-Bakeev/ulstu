@@ -14,7 +14,7 @@
                 <th>Email</th>
                 <th>Роль</th>
                 <th>Год поступления</th>
-                <th>Учебная группа</th> <!-- New column for the educational group -->
+                <th>Учебная группа</th>
                 <th>Действия</th>
             </tr>
             </thead>
@@ -46,4 +46,6 @@
             </tbody>
         </table>
     </div>
+    <hr>
+    <div id="notification" class="notification hidden">Пользователь успешно добавлен</div>
 @endsection

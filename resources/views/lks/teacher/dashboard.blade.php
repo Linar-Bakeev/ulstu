@@ -30,7 +30,8 @@
                         <a href="{{ route('teacher.grades') }}" class="btn btn-primary">Просмотреть успеваемость</a>
                         <a href="{{ route('grades.create') }}" class="btn btn-primary">Заполнить ведомость</a>
                         <a href="{{ route('teacher.create_announcement_form') }}" class="btn btn-primary">Создать объявление</a>
-                        <a style="margin-top: 10px" href="{{ route('teacher.subjects') }}" class="btn btn-primary">Мои предметы</a>
+                        <a style="margin-top: 5px" href="{{ route('teacher.subjects') }}" class="btn btn-primary">Мои предметы</a>
+
                     </div>
                 </div>
             </div>

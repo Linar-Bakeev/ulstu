@@ -24,14 +24,12 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('student.dashboard') }}">Личный кабинет</a>
                     </li>
-                    <!-- Другие ссылки для студентов -->
                 @endif
                 <!-- Ссылки для преподавателей -->
                 @if(auth()->check() && auth()->user()->role === 'teacher')
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('teacher.dashboard') }}">Личный кабинет</a>
                     </li>
-                    <!-- Другие ссылки для преподавателей -->
                 @endif
                 <!-- Ссылки для администратора -->
                 @if(auth()->check() && auth()->user()->role === 'admin')
@@ -49,10 +47,8 @@
                             </li>
                         </ul>
                     </div>
-                    <!-- Другие ссылки для администратора -->
                 @endif
             </ul>
-            <!-- Зона авторизации и регистрации -->
             <div class="my-2 my-lg-0">
                 @guest
                     <a class="btn btn-outline-primary mr-2" href="{{ route('login.form') }}">Вход</a>
@@ -68,12 +64,10 @@
     </div>
 </nav>
 
-<!-- Контент страницы -->
 <div class="container mt-4">
     @yield('content')
 </div>
 
-<!-- Подключение скриптов Bootstrap -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

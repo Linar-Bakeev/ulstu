@@ -17,5 +17,4 @@ class AcademicYearController extends Controller
         return view('academic_years.index', compact('academicYears'));
     }
 
-    // Другие методы для управления учебными годами
 }

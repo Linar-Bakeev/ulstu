@@ -8,10 +8,6 @@
         <form method="POST" action="{{ route('change') }}">
             @csrf
 
-{{--            <div class="form-group">--}}
-{{--                <label for="plain_password">Текущий пароль</label>--}}
-{{--                <input id="plain_password" type="text" class="form-control" name="plain_password" value="{{ auth()->user()->plain_password}}" >--}}
-{{--            </div>--}}
             <div class="form-group">
                 <label for="password">Новый пароль</label>
                 <input id="password" type="password" class="form-control" name="password" >

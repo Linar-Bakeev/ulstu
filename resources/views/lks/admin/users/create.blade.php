@@ -50,14 +50,6 @@
                                 <option value="teacher">Преподаватель</option>
                                 <option value="admin">Администратор</option>
                             </select>
-                            <div class="form-group" id="group_id_container" style="display:none;">
-                                <label for="group_id">Группа</label>
-                                <select name="group_id" id="group_id" class="form-control">
-                                    @foreach($groups as $group)
-                                        <option value="{{ $group->id }}">{{ $group->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
                             @error('role')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -67,7 +59,6 @@
                         <div class="form-group" id="group_id_container" >
                             <label for="group_id">Группа (оставьте поле пустым, если не являетесь студентом)</label>
                             <select name="group_id" id="group_id" class="form-control">
-                                <option value="">Выберите учебную группу</option>
                             @foreach($groups as $group)
                                     <option value="{{ $group->id }}">{{ $group->name }}</option>
                                 @endforeach
@@ -84,17 +75,5 @@
     </div>
 @endsection
 
-{{--@push('scripts')--}}
-{{--    <script>--}}
-{{--        document.getElementById('role').addEventListener('change', function() {--}}
-{{--            var groupContainer = document.getElementById('group_id_container');--}}
-{{--            if (this.value === 'student') {--}}
-{{--                groupContainer.style.display = 'block';--}}
-{{--            } else {--}}
-{{--                groupContainer.style.display = 'none';--}}
-{{--            }--}}
-{{--        });--}}
-{{--    </script>--}}
-{{--@endpush--}}
 
 

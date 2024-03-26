@@ -17,5 +17,4 @@ class AuditoriumController extends Controller
         return view('auditoriums.index', compact('auditoriums'));
     }
 
-    // Другие методы для управления аудиториями
 }

@@ -17,5 +17,4 @@ class LessonController extends Controller
         return view('schedule.index', compact('schedule'));
     }
 
-    // Другие методы для управления занятиями
 }

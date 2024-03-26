@@ -17,5 +17,4 @@ class DocumentController extends Controller
         return view('documents.index', compact('documents'));
     }
 
-    // Другие методы для управления документами
 }

@@ -17,5 +17,4 @@ class GroupController extends Controller
         return view('groups.index', compact('groups'));
     }
 
-    // Другие методы для управления группами
 }

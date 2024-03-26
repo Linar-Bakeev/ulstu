@@ -15,19 +15,19 @@
             <div class="form-group">
                 <label for="group_id">Группа</label>
                 <select class="form-control" id="group_id" name="group_id">
-                    <!-- Здесь вывести список групп -->
+                    <!--  вывести список групп -->
                 </select>
             </div>
             <div class="form-group">
                 <label for="subject_id">Предмет</label>
                 <select class="form-control" id="subject_id" name="subject_id">
-                    <!-- Здесь вывести список предметов -->
+                    <!--  вывести список предметов -->
                 </select>
             </div>
             <div class="form-group">
                 <label for="student_id">Студент</label>
                 <select class="form-control" id="student_id" name="student_id">
-                    <!-- Здесь вывести список студентов -->
+                    <!--  вывести список студентов -->
                 </select>
             </div>
             <div class="form-group">

@@ -49,16 +49,16 @@ class StudentDashboardController extends Controller
     }
     public function requestEducationCertificate()
     {
-        // Здесь должна быть логика запроса справки об обучении в ВУЗе
+        // логика запроса справки об обучении в ВУЗе
     }
 
     public function requestExamResit()
     {
-        // Здесь должна быть логика запроса направления на пересдачу
+        // логика запроса направления на пересдачу
     }
 
     public function applyForScholarship()
     {
-        // Здесь должна быть логика подачи заявления о повышенной стипендии
+        // логика подачи заявления о повышенной стипендии
     }
 }

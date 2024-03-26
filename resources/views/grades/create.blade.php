@@ -5,27 +5,43 @@
 @section('content')
     <div class="container">
         <h1>Заполнение ведомости</h1>
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
         <form method="POST" action="{{ route('grades.store') }}">
             @csrf
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>Студент</th>
-                    <th>Оценка</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach ($students as $student)
-                    <tr>
-                        <td>{{ $student->name }}</td>
-                        <td>
-                            <input type="number" name="grades[{{ $student->id }}]" min="1" max="10">
-                        </td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
-            <button type="submit" class="btn btn-primary">Сохранить оценки</button>
+            <div class="form-group">
+                <label for="group_id">Группа</label>
+                <select class="form-control" id="group_id" name="group_id">
+                    @foreach($groups as $group)
+                        <option value="{{ $group->id }}">{{ $group->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="subject_id">Предмет</label>
+                <select class="form-control" id="subject_id" name="subject_id">
+                    <!-- Здесь вывести список предметов преподавателя -->
+                    @foreach($subjects as $subject)
+                        <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="student_id">Студент</label>
+                <select class="form-control" id="student_id" name="student_id">
+                    @foreach($students as $student)
+                        <option value="{{ $student->id }}">{{ $student->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="mark">Оценка</label>
+                <input type="number" class="form-control" id="mark" name="mark" min="1" max="5">
+            </div>
+            <button type="submit" class="btn btn-primary">Добавить оценку</button>
         </form>
     </div>
 @endsection

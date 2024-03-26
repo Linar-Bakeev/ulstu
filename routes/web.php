@@ -71,14 +71,13 @@ Route::get('/applications', [ApplicationController::class, 'index'])->name('appl
 Route::get('/documents', [DocumentController::class, 'index'])->name('documents.index');
 Route::get('/academic_years', [AcademicYearController::class, 'index'])->name('academic_years.index');
 
-//Route::prefix('lks/teacher')->group(function () {
-//    Route::get('dashboard', [TeacherDashboardController::class, 'index'])->name('teacher.dashboard');
-//    Route::get('grades', [TeacherDashboardController::class, 'viewGrades'])->name('teacher.grades');
-//    Route::get('fill_attendance', [TeacherDashboardController::class, 'fillAttendance'])->name('teacher.fill_attendance');
-//    Route::get('create_announcement_form', [TeacherDashboardController::class, 'createAnnouncementForm'])->name('teacher.create_announcement_form');
-//    Route::post('post_announcement', [TeacherDashboardController::class, 'postAnnouncement'])->name('teacher.post_announcement');
-//    Route::get('subjects', [TeacherController::class, 'subjects'])->name('teacher.subjects'); // Добавленный маршрут
-//});
+Route::prefix('lks/teacher')->group(function () {
+    // Другие маршруты...
+    Route::get('subjects', [TeacherController::class, 'subjects'])->name('teacher.subjects'); // Добавленный маршрут
+    Route::get('subjects/create', [SubjectController::class, 'create'])->name('teacher.subjects.create');
+    Route::post('subjects/store', [SubjectController::class, 'store'])->name('teacher.subjects.store');
+});
+
 Route::post('change', function (){return view('change');})->name('change');
 
 Route::resource('subjects', 'SubjectController');
